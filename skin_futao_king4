@@ -117,7 +117,7 @@ function modifyCode(text) {
 	addModification('this.game.unleash.isEnabled("disable-ads")', 'true', true);
 
 	// スキン定義追加
-	addModification('{id:"bob",name:"Bob",tier:0},', 'CustomSkin:{id:"CustomSkin",name:"CustomSkin",tier:2},bob:{id:"bob",name:"Bob",tier:0},');
+	addModification('skins={bob:{id:"bob",name:"Bob",tier:0},', 'skins={CustomSkin:{id:"CustomSkin",name:"CustomSkin",tier:2},bob:{id:"bob",name:"Bob",tier:0},');
 
 	// スキンダウンロード
 	addModification('async downloadSkin(u){', `
