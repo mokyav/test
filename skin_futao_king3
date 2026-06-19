@@ -109,29 +109,15 @@ function modifyCode(text) {
 
 	addModification('VERSION$1," | ",', `""," | ",`);
 
-	// drawImage helper
-	addModification('COLOR_TOOLTIP_BG,BORDER_SIZE)}', `
-		function drawImage(ctx, img, posX, posY, sizeX, sizeY, color) {
-			if (color) {
-				ctx.fillStyle = color;
-				ctx.fillRect(posX, posY, sizeX, sizeY);
-				ctx.globalCompositeOperation = "destination-in";
-			}
-			ctx.drawImage(img, posX, posY, sizeX, sizeY);
-			if (color) ctx.globalCompositeOperation = "source-over";
-		}
-	`);
-
 	addModification('+=h*y+u*x}', `
 		if (this == player) {
 			for(const [index, func] of Object.entries(tickLoop)) if (func) func();
 		}
 	`);
 	addModification('this.game.unleash.isEnabled("disable-ads")', 'true', true);
-	addModification('h.render()})', '; for(const [index, func] of Object.entries(renderTickLoop)) if (func) func();');
 
 	// スキン定義追加
-	addModification('bob:{id:"bob",name:"Bob",tier:0,skinny:!1},', 'CustomSkin:{id:"CustomSkin",name:"CustomSkin",tier:2,skinny:!1},');
+	addModification('{id:"bob",name:"Bob",tier:0},', 'CustomSkin:{id:"CustomSkin",name:"CustomSkin",tier:2},bob:{id:"bob",name:"Bob",tier:0},');
 
 	// スキンダウンロード
 	addModification('async downloadSkin(u){', `
