@@ -1,0 +1,13 @@
+export const CHUNK_SIZE = 16;
+export const WORLD_HEIGHT = 64;
+export const SEA_LEVEL = 22;
+export const CHUNK_VOLUME = CHUNK_SIZE * CHUNK_SIZE * WORLD_HEIGHT;
+export const MAX_PLAYERS = 8;
+export const MAX_COORD = 100000; // |x|,|z| の上限
+export const MAX_CHUNK_RECORDS = 4096; // 1ルームあたりの編集済みチャンク上限
+export const REACH = 6;
+export const SERVER_REACH = 16; // サーバー側の許容距離(ラグ考慮で緩め)
+export const DAY_LENGTH_SEC = 480;
+export const ROOM_CODE_ALPHABET = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+export const ROOM_CODE_LENGTH = 6;
+export const NO_EDIT = 255;

@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Koruva</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧱</text></svg>">
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<canvas id="gl"></canvas>
+
+<div id="hud" hidden>
+  <div id="crosshair"></div>
+  <div id="info"></div>
+  <div id="roombadge" hidden><span id="roomcode"></span><button id="copylink" title="招待リンクをコピー">リンクをコピー</button></div>
+  <div id="chatlog"></div>
+  <input id="chatinput" type="text" maxlength="200" autocomplete="off" placeholder="メッセージを入力して Enter" hidden>
+  <div id="playerlist" hidden></div>
+  <div id="toast"></div>
+  <div id="breakbar" hidden><i></i></div>
+  <div id="hearts" hidden></div>
+  <div id="hunger" hidden></div>
+  <div id="hotbar"></div>
+  <div id="underwater" hidden></div>
+</div>
+
+<div id="inventory" class="panel" hidden>
+  <h2>インベントリ <small id="invhint">クリックで選択中のホットバー枠に設定</small></h2>
+  <div id="invgrid"></div>
+  <div id="invhotbar"></div>
+</div>
+
+<div id="title" class="screen">
+  <div class="card">
+    <h1>Koru<span>va</span></h1>
+    <p class="sub">ブラウザで遊べるマルチプレイ・ボクセルサンドボックス</p>
+
+    <div class="row">
+      <label>名前<input id="name" maxlength="16" placeholder="name" autocomplete="off" autocapitalize="off" spellcheck="false"><small class="hint">使える文字: a-z A-Z 0-9 _ (16文字まで・空白や記号は不可)</small></label>
+    </div>
+    <div class="skinrow">
+      <canvas id="skinpreview" width="64" height="112"></canvas>
+      <div class="colors">
+        <label>肌<input type="color" id="c-skin"></label>
+        <label>髪<input type="color" id="c-hair"></label>
+        <label>服<input type="color" id="c-shirt"></label>
+        <label>ズボン<input type="color" id="c-pants"></label>
+        <button id="skinrandom" class="ghost">ランダム</button>
+      </div>
+    </div>
+
+    <div class="btns">
+      <button id="btn-solo" class="primary">ソロで遊ぶ</button>
+      <button id="btn-solo-new" class="ghost" hidden>新しいワールド</button>
+    </div>
+    <div class="modesel" id="modesel">
+      <span>ルームのゲームモード</span>
+      <div class="seg">
+        <button type="button" data-mode="creative" class="on">クリエイティブ</button>
+        <button type="button" data-mode="survival">サバイバル</button>
+      </div>
+      <small id="modedesc">飛行OK・ブロック無限・すぐ壊せる</small>
+    </div>
+    <div class="btns">
+      <button id="btn-create" class="primary alt">ルームを作成</button>
+    </div>
+    <div class="join">
+      <input id="joincode" maxlength="6" placeholder="ルームコード" autocapitalize="characters" spellcheck="false">
+      <button id="btn-join" class="primary alt">参加</button>
+    </div>
+    <p id="titleerr" class="err"></p>
+    <p class="help">WASD 移動 / マウス 視点 / 左クリック 破壊 / 右クリック 設置 / 1-9・ホイール ホットバー / E インベントリ / Enter・T チャット / Esc メニュー / V 三人称 / Space2回 飛行(クリエイティブ)</p>
+  </div>
+</div>
+
+<div id="pause" class="screen" hidden>
+  <div class="card">
+    <h2 id="pausetitle">一時停止</h2>
+    <button id="btn-resume" class="primary">ゲームに戻る</button>
+    <div class="grid2">
+      <button id="btn-save" class="ghost">セーブ</button>
+      <button id="btn-load" class="ghost">ロード</button>
+    </div>
+    <label class="slider">描画距離 <b id="rdval"></b><input type="range" id="rd" min="3" max="12" step="1"></label>
+    <label class="slider">視点感度 <b id="sensval"></b><input type="range" id="sens" min="1" max="10" step="1"></label>
+    <button id="btn-copycode" class="ghost" hidden>ルームコードをコピー</button>
+    <button id="btn-admin" class="admin" hidden>🛠 サーバー管理</button>
+    <button id="btn-quit" class="danger">サーバーを抜ける</button>
+    <p id="pausemsg" class="sub"></p>
+  </div>
+</div>
+
+<div id="admin" class="screen" hidden>
+  <div class="card">
+    <h2>サーバー管理 <small class="hostbadge">ホスト専用</small></h2>
+    <h3>プレイヤー</h3>
+    <div id="adminplayers" class="adminlist"></div>
+    <h3>BAN中</h3>
+    <div id="adminbans" class="adminlist"></div>
+    <button id="btn-admin-close" class="primary">メニューに戻る</button>
+  </div>
+</div>
+
+<div id="loading" class="screen" hidden>
+  <div class="card"><h2 id="loadtext">読み込み中…</h2><div class="bar"><i id="loadbar"></i></div></div>
+</div>
+
+<script type="module" src="./main.ts"></script>
+</body>
+</html>
